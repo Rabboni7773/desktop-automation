@@ -4,7 +4,7 @@ from langgraph.checkpoint.memory import InMemorySaver
 from langchain_groq import ChatGroq
 from langchain_core.messages import BaseMessage, SystemMessage, HumanMessage
 from langchain_core.messages.utils import trim_messages, count_tokens_approximately
-from .prompts import SYSTEM_PROMPT_SUMMARY, SYSTEM_PROMPT_NOT_SUMMARY, CHATBOT_SYS_PROMPT
+from prompts import SYSTEM_PROMPT_SUMMARY, SYSTEM_PROMPT_NOT_SUMMARY, CHATBOT_SYS_PROMPT
 from dotenv import load_dotenv
 from typing import TypedDict, Annotated, Literal
 import asyncio
@@ -66,7 +66,7 @@ async def message_summarizer(state : ChatState):
 
     summary_generated = await summary_model.ainvoke(prompt).content
 
-    return {"summary" : summary_generated}
+    return {"summary" : summary_generated, "messages" : [RemoveMessage(id = msg.id) for msg in extra_msgs]}
 
 async def chat_node(state: ChatState):
     sys_prompt = [SystemMessage(content = CHATBOT_SYS_PROMPT)]
