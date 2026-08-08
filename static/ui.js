@@ -8,11 +8,11 @@ import { initControls } from './controls.js';
 
 const app = document.getElementById('app');
 app.innerHTML = `
-  <aside id="sidebar" role="navigation" aria-label="Conversation list" class="hidden md:flex w-80 flex-col border-r border-slate-800/80 bg-slate-900/80 backdrop-blur-xl"></aside>
-  <main role="main" class="flex min-w-0 flex-1 flex-col bg-slate-950/80">
-    <header role="banner" class="flex items-center justify-between border-b border-slate-800/80 px-5 py-4"></header>
+  <aside id="sidebar" role="navigation" aria-label="Conversation list" class="hidden md:flex w-72 flex-col border-r border-gray-200 dark:border-slate-800/80 bg-white dark:bg-slate-900/80"></aside>
+  <main role="main" class="flex min-w-0 flex-1 flex-col bg-gray-50 dark:bg-slate-950">
+    <header role="banner" class="flex items-center justify-between border-b border-gray-200 dark:border-slate-800/80 bg-white dark:bg-transparent px-5 py-3"></header>
     <section id="chat-panel" class="flex-1 overflow-hidden" aria-live="polite"></section>
-    <footer role="contentinfo" class="border-t border-slate-800/80 px-4 py-4 md:px-6"></footer>
+    <footer role="contentinfo" class="border-t border-gray-200 dark:border-slate-800/80 bg-white dark:bg-transparent px-4 py-3 md:px-6"></footer>
   </main>
 `;
 

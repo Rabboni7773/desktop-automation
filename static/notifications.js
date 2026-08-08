@@ -7,13 +7,17 @@ export function toast(message, { type = 'info', duration = 4000 } = {}) {
     document.body.appendChild(container);
   }
 
-  const toast = document.createElement('div');
-  toast.className = `rounded-lg px-4 py-2 text-sm shadow-soft glass ${type === 'error' ? 'bg-rose-600/80 text-white' : 'bg-slate-800/80 text-slate-100'}`;
-  toast.textContent = message;
-  container.appendChild(toast);
+  const el = document.createElement('div');
+  if (type === 'error') {
+    el.className = 'rounded-lg px-4 py-2 text-sm border border-rose-200 dark:border-rose-500/30 bg-rose-50 dark:bg-rose-600/80 text-rose-700 dark:text-white shadow-sm';
+  } else {
+    el.className = 'rounded-lg px-4 py-2 text-sm border border-gray-200 dark:border-slate-700/60 bg-white dark:bg-slate-800/90 text-gray-800 dark:text-slate-100 shadow-sm';
+  }
+  el.textContent = message;
+  container.appendChild(el);
 
   setTimeout(() => {
-    toast.remove();
+    el.remove();
     if (!container.children.length) container.remove();
   }, duration);
 }

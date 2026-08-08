@@ -89,16 +89,18 @@ async def thread_response(thread_id: str):
             config = {"configurable": {"thread_id": thread_id}}
             snapshot = await wf.aget_state(config)
 
+            _role_map = {"human": "user", "ai": "assistant"}
             history = []
             for msg in snapshot.values.get("messages", []):
-                history.append({"role": msg.type, "content": msg.content})
+                role = _role_map.get(msg.type, msg.type)
+                history.append({"role": role, "content": msg.content})
 
             return {"messages": history}
 
     async with aiosqlite.connect(str(DB_DIR / "thread_name.db")) as db:
         await db.execute(
             "INSERT INTO thread_name (thread_name, thread_id) VALUES (?, ?)",
-            ("placeholder", thread_id),
+            ("New Chat", thread_id),
         )
         await db.commit()
 
